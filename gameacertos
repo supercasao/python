@@ -1,0 +1,46 @@
+import random
+
+print("******************************")
+print("Welcome to the game")
+print("******************************")
+
+secret_number = random.randrange(1,101)
+round = 1
+points = 1000
+
+print("difficulty level?:")
+difficulty_level= int(input("(1)easy  (2)medium  (3)hard:  "))
+if(difficulty_level == 1):
+    total_attempts = 10
+elif(difficulty_level == 2):
+    total_attempts = 7
+elif(difficulty_level == 3):
+    total_attempts = 5
+else:
+    print("error! enter a valid number.")
+
+while(total_attempts >= round):
+    print("round = ", round, "of", total_attempts)
+    attempt = int(input("enter a number between 1 and 100: "))
+
+    if(attempt < 1 or attempt > 100):
+        print("you must enter a number between 1 and 100")
+        continue
+
+    got_it_right = secret_number == attempt
+    larger = secret_number < attempt
+    smaller = secret_number > attempt
+
+    if(got_it_right):
+            print("you're right. you are with {}" .format(points))
+            break
+    else:
+        if(larger):
+            print("you missed, try bigger than the secret number.")
+        elif(smaller):
+            print("you missed, attempt less than the secret number.")
+        lost_points = abs(attempt - secret_number)
+        points = points - lost_points
+    round = round + 1
+
+print("end of the game!.")
